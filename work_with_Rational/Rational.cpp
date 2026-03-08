@@ -1,6 +1,6 @@
 ﻿//qwest: 
-//(const Rational& r) что за r и зачем &
-
+#include <iostream>
+using namespace std;
 #include "Rational.h"
 
 int NOD(int a, int b) {
@@ -25,10 +25,12 @@ Rational::Rational(int num, int den)
 {
 	numer = num;
 	denom = den;
+	simplify();
 }
 Rational& Rational::operator += (const Rational& r) {
 	numer = (numer * r.denom + denom * r.numer);
 	denom *= r.denom;
+	simplify();
 	return *this;
 }
 Rational Rational::operator + (const Rational& r) const
@@ -50,6 +52,42 @@ Rational& Rational::operator -=(const Rational& r)
 {
 	return (*this += (-r));
 }
+Rational& Rational::operator ++()
+{
+	numer += denom;
+	return *this;
+}
+Rational Rational::operator++ (int)
+{
+	Rational res(*this);
+	numer += denom; //почему здесь не нужно прописывать res.numer?
+	return res;
+}
+bool Rational::operator ==(const Rational& r) const
+{
+	// return (numer == r.numer) && (denom == r.denom); - не прокатит для 1/3 и 3/9
+	return (numer * r.denom == r.numer * denom);
+
+}
+bool Rational::operator !=(const Rational& r) const
+{
+	return !(*this == r);
+}
+
+Rational::operator int() const{ return numer / denom; }
+Rational::operator double() const { return (double(numer) / denom); }
+
+istream& operator >>(istream& in, Rational& r) // как работает это
+{
+	in >> r.numer >> r.denom;
+	r.simplify(); //методом тыка
+	return in; 
+}
+ostream& operator <<(ostream& out, const Rational& r)
+{
+	out << r.numer << "/" << r.denom;
+	return out;
+}
 
 void Rational::simplify() {
 	int nod = NOD(numer, denom);
@@ -59,3 +97,4 @@ void Rational::simplify() {
 	}
 	
 }
+

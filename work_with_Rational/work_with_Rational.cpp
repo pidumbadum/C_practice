@@ -9,8 +9,9 @@ int main()
 {
     Rational a(2, 3);
     Rational b(1, 3);
-    Rational c = a + b;
-    cout << c.numer<<' '<<c.denom;
+    Rational c;
+    cin >> c;
+    cout << c;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

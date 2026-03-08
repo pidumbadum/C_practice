@@ -1,9 +1,15 @@
-﻿#pragma once
+﻿#include <iostream>
+using namespace std; //было бы славно упомянуть про необзодимость этих строк в презе
+
 class Rational
 {
 private:
 	// упрощение
 	void simplify();
+	friend istream& operator >>(istream& in, Rational& r);
+	friend ostream& operator <<(ostream& out, const Rational& r);
+	operator int() const;
+	operator double() const;
 
 public:
 	int numer;
@@ -22,6 +28,10 @@ public:
 	/*Rational operator -(const Rational& r) const;*/
 	Rational& operator -= (const Rational& r); 
 	
-
+	Rational& operator ++();
+	Rational operator ++(int); //Что за инт? почему он в скобках тут?
+	
+	bool operator == (const Rational& r) const;
+	bool operator != (const Rational& r) const;
 };
 

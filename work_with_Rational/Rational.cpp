@@ -3,6 +3,8 @@ using namespace std;
 #include "Rational.h"
 
 int NOD(int a, int b) {
+	if (a < 0) { a *= 1; }
+	if (b < 0) { b *= 1; }
 	while (b != 0) {
 		int ostatok = a % b;
 		a = b;
@@ -11,14 +13,16 @@ int NOD(int a, int b) {
 	return a;
 }
 
+
 //объявление
 Rational::Rational()
 {
 	numer = 0;
 	denom = 1;
 }
-Rational::Rational(int namber) {
-	numer = namber;
+Rational::Rational(int nam) 
+{
+	numer = nam;
 	denom = 1;
 }
 Rational::Rational(int num, int den)
@@ -27,6 +31,7 @@ Rational::Rational(int num, int den)
 	denom = den;
 	simplify();
 }
+
 //арифметические действия
 Rational& Rational::operator += (const Rational& r) {
 	numer = (numer * r.denom + denom * r.numer);
@@ -99,6 +104,23 @@ bool Rational::operator !=(const Rational& r) const
 {
 	return !(*this == r);
 }
+bool Rational::operator > (const Rational& r) const
+{
+	return (numer * r.denom > r.numer * denom);
+}
+bool Rational::operator >= (const Rational& r) const
+{
+	return (numer * r.denom >= r.numer * denom);
+}
+bool Rational::operator < (const Rational& r) const
+{
+	return !(*this > r);
+}
+bool Rational::operator <= (const Rational& r) const
+{
+	return !(*this >= r);
+}
+
 // перевод в другие типы
 Rational::operator int() const{ return numer / denom; }
 Rational::operator double() const { return (double(numer) / denom); }
@@ -124,6 +146,9 @@ void Rational::simplify() {
 		numer /= nod;
 		denom /= nod;
 	}
-	
+	if (denom < 0) {
+		numer *= -1;
+		denom *= -1;
+	}
 }
 

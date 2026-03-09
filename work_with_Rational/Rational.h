@@ -19,6 +19,7 @@ public:
 	Rational(int n);
 	Rational(int n, int d);
 
+	//арифметические действия
 	Rational& operator += (const Rational& r);
 	// первый & вернет не копию, а ссылку на существующий объект
 	// второй & делает тоже самое, но это надо для экономии памяти 
@@ -32,10 +33,16 @@ public:
 	Rational& operator /= (const Rational& r);
 	Rational operator / (const Rational& r) const;
 
+
 	Rational& operator ++();
-	Rational operator ++(int); //Что за инт? почему он в скобках тут?
+	Rational operator ++(int);
 	
+	//сравнение
 	bool operator == (const Rational& r) const;
 	bool operator != (const Rational& r) const;
+	bool operator > (const Rational& r) const;
+	bool operator >= (const Rational& r) const;
+	bool operator < (const Rational& r) const;
+	bool operator <= (const Rational& r) const;
 };
 

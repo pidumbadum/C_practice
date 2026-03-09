@@ -7,11 +7,11 @@ using namespace std;
 
 int main()
 {
-    Rational a(2, 3);
-    Rational b(1, 3);
+    Rational a(1, 3);
+    Rational b(2, 6);
     Rational c;
     cin >> c;
-    cout << c;
+    cout << (c /= 2)<< ' '<< a / b;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

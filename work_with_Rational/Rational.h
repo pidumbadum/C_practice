@@ -25,9 +25,13 @@ public:
 	Rational operator + (const Rational& r) const;
 	Rational operator -() const; // const в конце гарантирует, что мы не поменяем 
 								//само число, к которому применяеm сложение, при a + b не должно меняться a.
-	/*Rational operator -(const Rational& r) const;*/
+	Rational operator -(const Rational& r) const;
 	Rational& operator -= (const Rational& r); 
-	
+	Rational& operator *= (const Rational& r);
+	Rational operator * (const Rational& r) const;
+	Rational& operator /= (const Rational& r);
+	Rational operator / (const Rational& r) const;
+
 	Rational& operator ++();
 	Rational operator ++(int); //Что за инт? почему он в скобках тут?
 	

@@ -1,5 +1,4 @@
-﻿//qwest: 
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
 #include "Rational.h"
 
@@ -12,6 +11,7 @@ int NOD(int a, int b) {
 	return a;
 }
 
+//объявление
 Rational::Rational()
 {
 	numer = 0;
@@ -27,6 +27,7 @@ Rational::Rational(int num, int den)
 	denom = den;
 	simplify();
 }
+//арифметические действия
 Rational& Rational::operator += (const Rational& r) {
 	numer = (numer * r.denom + denom * r.numer);
 	denom *= r.denom;
@@ -43,11 +44,11 @@ Rational Rational::operator -() const
 	Rational r(-numer, denom);
 	return r;
 }
-//Rational& Rational::operator -(const Rational& r) const
-//{
-//	Rational res(*this);
-//	return (res += (-r));
-//}
+Rational Rational::operator -(const Rational& r) const
+{
+	Rational res(*this);
+	return (res += (-r));
+}
 Rational& Rational::operator -=(const Rational& r)
 {
 	return (*this += (-r));
@@ -63,9 +64,34 @@ Rational Rational::operator++ (int)
 	numer += denom; //почему здесь не нужно прописывать res.numer?
 	return res;
 }
+Rational& Rational::operator *= (const Rational& r)
+{
+	numer = numer * r.numer;
+	denom = denom * r.denom;
+	simplify();
+	return (*this);
+}
+Rational Rational::operator * (const Rational& r) const
+{
+	Rational res(numer, denom);
+	return (res *= r);
+}
+Rational& Rational::operator /= (const Rational& r)
+{
+	Rational divider(r.denom, r.numer);
+	return(*this *= divider);
+}
+Rational Rational::operator / (const Rational& r) const
+{
+	Rational res(numer, denom);
+	return res /= r;
+}
+
+//сравнение 
 bool Rational::operator ==(const Rational& r) const
 {
 	// return (numer == r.numer) && (denom == r.denom); - не прокатит для 1/3 и 3/9
+	
 	return (numer * r.denom == r.numer * denom);
 
 }
@@ -73,7 +99,7 @@ bool Rational::operator !=(const Rational& r) const
 {
 	return !(*this == r);
 }
-
+// перевод в другие типы
 Rational::operator int() const{ return numer / denom; }
 Rational::operator double() const { return (double(numer) / denom); }
 
@@ -85,7 +111,10 @@ istream& operator >>(istream& in, Rational& r) // как работает это
 }
 ostream& operator <<(ostream& out, const Rational& r)
 {
-	out << r.numer << "/" << r.denom;
+	if (r.numer == r.denom) {
+		out << 1;
+	}
+	else{out << r.numer << "/" << r.denom;}
 	return out;
 }
 

@@ -1,6 +1,15 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,c++,windows,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,c++,windows,linux
 
+### MOE АВТОРСТВО ###
+*.vcxproj
+*.filters
+*.user
+*.sln
+Debug/
+work wit.fd9a0a9b/
+x64/
+
 ### C++ ###
 # Prerequisites
 *.d

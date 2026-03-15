@@ -94,7 +94,6 @@ Rational Rational::operator / (const Rational& r) const
 }
 Rational Rational::sqrt() const
 {
-	/*Rational Xn(numer, denom);*/
 	int numer1 = numer;
 	int denom1 = denom;
 

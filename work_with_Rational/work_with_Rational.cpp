@@ -30,8 +30,37 @@ int main()
     //    cout << "Правильно!" << endl;
 
     // Тестируем sqrt, решаем квадратное уравнение
-    Rational a(1, 4), b(1, 4);
-    cout << b.sqrt();
+    Rational a, b, c;
+    cout << "Ax ^ 2 + Bx + C = 0" << endl;
+    cout << "Enter A: ";
+    cin >> a;
+    cout << "Enter B: ";
+    cin >> b;
+    cout << "Enter C: ";
+    cin >> c;
+    Rational D;
+    D = b * b - Rational(4) * a * c;
+
+    Rational x1, x2, SQ_D;
+
+    if (D < Rational(0))
+    {
+        cout << "Discriminant is equal to zero!";
+    }
+    else
+    {
+        SQ_D = D.sqrt();
+        cout << "Discriminant is ";
+        cout << D << endl;
+        x1 = (-b - SQ_D) / (a * Rational(2));
+        x2 = (-b + SQ_D) / (a * Rational(2));
+        if (x1 != x2)
+        {
+            cout << "X1 = " << x1 << endl;
+            cout << "X2 = " << x1 << endl;
+        }
+        else { cout << "X1, X2 = " << x1; }
+    }
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

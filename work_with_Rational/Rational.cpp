@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 using namespace std;
 #include "Rational.h"
+class RationalExeption {};
 
 int NOD(int a, int b) {
 	if (a < 0) { a *= 1; }
@@ -91,6 +92,23 @@ Rational Rational::operator / (const Rational& r) const
 	Rational res(numer, denom);
 	return res /= r;
 }
+Rational Rational::sqrt() const
+{
+	/*Rational Xn(numer, denom);*/
+	int numer1 = numer;
+	int denom1 = denom;
+
+	for (int j = 0; j < 3; j++)
+	{
+		denom1 = (denom1 + denom / denom1) / 2;
+	}
+	for (int j = 0; j < 3; j++)
+	{
+		numer1 = (numer1 + numer / numer1) / 2;
+	}
+	Rational Xn(numer1, denom1);
+	return Xn;
+}
 
 //сравнение 
 bool Rational::operator ==(const Rational& r) const
@@ -128,6 +146,7 @@ Rational::operator double() const { return (double(numer) / denom); }
 istream& operator >>(istream& in, Rational& r) // как работает это
 {
 	in >> r.numer >> r.denom;
+	if (r.denom == 0) { throw RationalExeption(); }
 	r.simplify(); //методом тыка
 	return in; 
 }

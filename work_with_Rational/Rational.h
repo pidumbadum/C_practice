@@ -8,8 +8,6 @@ private:
 	void simplify();
 	friend istream& operator >>(istream& in, Rational& r);
 	friend ostream& operator <<(ostream& out, const Rational& r);
-	operator int() const;
-	operator double() const;
 
 public:
 	int numer;
@@ -30,9 +28,9 @@ public:
 	Rational& operator -= (const Rational& r); 
 	Rational& operator *= (const Rational& r);
 	Rational operator * (const Rational& r) const;
+	Rational sqrt() const;
 	Rational& operator /= (const Rational& r);
 	Rational operator / (const Rational& r) const;
-
 
 	Rational& operator ++();
 	Rational operator ++(int);
@@ -44,5 +42,8 @@ public:
 	bool operator >= (const Rational& r) const;
 	bool operator < (const Rational& r) const;
 	bool operator <= (const Rational& r) const;
+
+	operator int() const;
+	operator double() const;
 };
 

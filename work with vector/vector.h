@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 using namespace std;
 const int DEFAULT_CAPACITY = 10;
@@ -7,28 +7,28 @@ class ArrayException {};
 class Array
 {
 private:
-
+	void increaseCapacity(int newCapacity);
 public:
 	int* ptr;
-	int size; // Текущий размер
-	int capacity; // Вместимость
+	int size; // РўРµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ
+	int capacity; // Р’РјРµСЃС‚РёРјРѕСЃС‚СЊ
 	explicit Array(int startCapacity = DEFAULT_CAPACITY);
 
 	~Array();
 
 	Array(const Array& arr);
-	Array& operator = (const Array& arr); //вот тут почему передается const Array& arr, а не int
+	Array& operator = (const Array& arr); //РІРѕС‚ С‚СѓС‚ РїРѕС‡РµРјСѓ РїРµСЂРµРґР°РµС‚СЃСЏ const Array& arr, Р° РЅРµ int
 
 	int& operator [] (int index);
 
-	//вставка элемпентов в массив 
-	void increaseCapacity(int newCapacity);
+	//РІСЃС‚Р°РІРєР° СЌР»РµРјРїРµРЅС‚РѕРІ РІ РјР°СЃСЃРёРІ 
+	
 	void insert(int index, int elem);
 	void insert(int elem);
 	void remove(int index);
 
-	//Получение размера
-	// Вывод массива в поток
+	//РџРѕР»СѓС‡РµРЅРёРµ СЂР°Р·РјРµСЂР°
+	// Р’С‹РІРѕРґ РјР°СЃСЃРёРІР° РІ РїРѕС‚РѕРє
 	int getSize() const;
 	friend ostream& operator <<(ostream& out, const Array& arr);
 };

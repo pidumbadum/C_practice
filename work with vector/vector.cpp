@@ -1,4 +1,4 @@
-#include "vector.h"
+ï»¿#include "vector.h"
 
 Array::Array(int startCapacity) 
 {
@@ -12,7 +12,7 @@ Array:: ~Array()
 {
 	delete[] ptr;
 }
-Array::Array(const Array &arr) //âîò òóò íåïîíÿòíî
+Array::Array(const Array &arr) //Ð²Ð¾Ñ‚ Ñ‚ÑƒÑ‚ Ð½ÐµÐ¿Ð¾Ð½ÑÑ‚Ð½Ð¾
 {
 	ptr = new int[arr.capacity];
 	size = arr.size;
@@ -39,13 +39,13 @@ int&  Array::operator[] (int index)
 {
 	if (index >= size || index < 0)
 	{
-		//çäåñü íóæíî îáðàáàòûâàòü íåêîððåêòíûå èíäåêñû
+		//Ð·Ð´ÐµÑÑŒ Ð½ÑƒÐ¶Ð½Ð¾ Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒ Ð½ÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ðµ Ð¸Ð½Ð´ÐµÐºÑÑ‹
 		throw ArrayException();
 	}
 	else { return ptr[index]; }
 }
 
-//âñòàâêà ýëåìïåíòîâ â ìàññèâ
+//Ð²ÑÑ‚Ð°Ð²ÐºÐ° ÑÐ»ÐµÐ¼Ð¿ÐµÐ½Ñ‚Ð¾Ð² Ð² Ð¼Ð°ÑÑÐ¸Ð²
 void Array::increaseCapacity(int newCapacity) {
 	capacity = newCapacity < capacity * 2 ?
 		capacity * 2 : newCapacity;
@@ -60,9 +60,9 @@ void Array::insert(int elem, int index)
 	if (index < 0 || index > size)
 		throw ArrayException();
 	if (size == capacity)
-		// Çàêðûòàÿ ôóíêöèÿ, óâåëè÷èâàþùàÿ ïðåäåëüíûé ðàçìåð
+		// Ð—Ð°ÐºÑ€Ñ‹Ñ‚Ð°Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ, ÑƒÐ²ÐµÐ»Ð¸Ñ‡Ð¸Ð²Ð°ÑŽÑ‰Ð°Ñ Ð¿Ñ€ÐµÐ´ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ñ€Ð°Ð·Ð¼ÐµÑ€
 		increaseCapacity(size + 1);
-	// Åñëè index==size, ýòîò öèêë íå âûïîëíèòñÿ íè ðàçó
+	// Ð•ÑÐ»Ð¸ index==size, ÑÑ‚Ð¾Ñ‚ Ñ†Ð¸ÐºÐ» Ð½Ðµ Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑÑ Ð½Ð¸ Ñ€Ð°Ð·Ñƒ
 	for (int j = size - 1; j >= index; j--)
 		ptr[j + 1] = ptr[j];
 	size++;

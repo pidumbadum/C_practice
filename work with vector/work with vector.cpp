@@ -1,5 +1,5 @@
 ﻿// work with vector.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//задача номер 1 : выделить паямть, записать массив чисел в первую очередь, если будет хотя бы это уже хорошо 
+//
 
 #include <iostream>
 #include "vector.h"
@@ -7,9 +7,54 @@ using namespace std;
 
 int main()
 {
-        Array arr;// Здесь вызовется конструктор
-        arr[0] = 1;
-        return 0; // А здесь вызовется деструктор
+    setlocale(LC_ALL, "Russian");
+
+    Array arr(4);
+    for (int i = 0; i < 4; i++)
+        arr.insert(i + 1);
+    cout << arr << endl;
+    for (int i = 0; i < 8; i += 2)
+        arr.insert(10 + i, i);
+    cout << arr << endl;
+    for (int i = 1; i < 8; i += 2)
+        arr[i] = 20 + i;
+    cout << arr << endl;
+    for (int i = 6; i >= 0; i -= 3)
+        arr.remove(i);
+    cout << arr << endl;
+
+    /*Array arr1(1000);
+    for (int i = 0; i < 1000; i++)
+        arr1.insert(i);
+    Array arr2(5000);
+    for (int i = 0; i < 5000; i++)
+        arr1.insert(i);
+    Array arr3(10000);
+    for (int i = 0; i < 4; i++)
+        arr1.insert(i);
+    Array arr4(50000);
+    for (int i = 0; i < 4; i++)
+        arr1.insert(i);
+    Array arr5(100000);
+    for (int i = 0; i < 4; i++)
+        arr1.insert(i);
+    Array arr6(500000);
+    for (int i = 0; i < 4; i++)
+        arr1.insert(i);
+    Array arr7(1000000);
+    for (int i = 0; i < 4; i++)
+        arr1.insert(i);*/
+
+    /*Array arr(100);
+    for (int i = 0; i < 13; i++)
+        arr.insert(i+1);
+
+    while (arr.size != 1)
+    {
+       
+
+    }
+    cout << arr;*/
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

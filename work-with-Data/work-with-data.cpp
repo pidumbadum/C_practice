@@ -8,8 +8,10 @@ int main()
 {
     char str[20];
     cin >> str;
-    char* slise = &str[5];  
-    cout << slise;
+    char* slise = &str[5]; 
+    cout << slise<< endl;
+    slise = &str[7];
+    cout << slise << endl;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

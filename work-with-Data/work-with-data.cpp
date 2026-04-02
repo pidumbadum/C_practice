@@ -2,16 +2,18 @@
 //
 
 #include <iostream>
+#include "data_time.h"
+#include <locale.h>
 using namespace std;
 
 int main()
 {
-    char str[20];
-    cin >> str;
-    char* slise = &str[5]; 
-    cout << slise<< endl;
-    slise = &str[7];
-    cout << slise << endl;
+	setlocale(LC_ALL, "ru");
+	data_time basic;
+	data_time new_data("18.02.2006");
+	data_time new_data("18 января 2006");
+	cout << "First: " << basic<<endl;
+	cout << "Second: " << new_data << endl;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

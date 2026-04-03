@@ -10,10 +10,14 @@ int main()
 {
 	setlocale(LC_ALL, "ru");
 	data_time basic;
-	data_time new_data("18.02.2006");
-	data_time new_data("18 января 2006");
+	data_time date1("18.02.2020");
+	data_time date2("18 августа 2017");
 	cout << "First: " << basic<<endl;
-	cout << "Second: " << new_data << endl;
+	cout << endl;
+	cout << "Second: " << date1 << endl;
+	cout << endl;
+	cout << "Third: " << date2 << endl;
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

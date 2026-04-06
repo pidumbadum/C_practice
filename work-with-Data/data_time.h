@@ -6,6 +6,7 @@ class Data_TimeException {};
 
 class data_time
 {	
+	unsigned int Convert_to_Julian_Date(data_time& Greg_date);
 	int day, month, year, sec;
 public:
 	//Конструктор по умолчанию и  с параматерами:

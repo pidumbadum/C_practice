@@ -36,6 +36,14 @@ int Find_months_index(char* month) {
 	}
 	return -1;
 }
+unsigned int data_time::Convert_to_Julian_Date(data_time& Greg_date) {
+	//формула с вики
+	int a = (14 - Greg_date.month)/12;
+	int y = Greg_date.year + 4800 - a;
+	int m = Greg_date.month + 12 * a - 3;
+	unsigned int jdn = Greg_date.day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+	return jdn;
+}
 
 //Конструктор по умолчанию и  с параматерами:
 data_time::data_time()

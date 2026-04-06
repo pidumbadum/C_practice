@@ -10,14 +10,19 @@ int main()
 {
 	setlocale(LC_ALL, "ru");
 	data_time basic;
-	data_time date1;
-	//cin >> date1;
-	data_time date2("18 августа 2017");
+	data_time date2;
+	cout << "Enter the second date: ";
+	cin >> date2;
+	data_time date3("18 августа 2017");
 	cout << "First: " << basic<<endl;
 	cout << endl;
-	cout << "Second: " << date1 << endl;
+	cout << "Second: " << date2 << endl;
 	cout << endl;
-	cout << "Third: " << date2 << endl;
+	cout << "Third: " << date3 << endl;
+	cout << "Second = Third? " << (date2 == date3) <<endl;
+	cout << "Second != Third? " << (date2 != date3) << endl;
+	cout << "Second < Third? " << (date2 < date3) << endl;
+	cout << "Second > Third? " << (date2 > date3) << endl;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

@@ -36,12 +36,12 @@ int Find_months_index(char* month) {
 	}
 	return -1;
 }
-unsigned int data_time::Convert_to_Julian_Date(data_time& Greg_date) {
+unsigned int data_time::toJulian_date() const {
 	//формула с вики
-	int a = (14 - Greg_date.month)/12;
-	int y = Greg_date.year + 4800 - a;
-	int m = Greg_date.month + 12 * a - 3;
-	unsigned int jdn = Greg_date.day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+	int a = (14 - month)/12;
+	int y = year + 4800 - a;
+	int m = month + 12 * a - 3;
+	unsigned int jdn = day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
 	return jdn;
 }
 
@@ -52,6 +52,7 @@ data_time::data_time()
 	month = 1;
 	year = 2001;
 	sec = 0;
+	day_week = 0;
 }
 data_time::data_time(const char* date)
 {
@@ -85,6 +86,33 @@ data_time::data_time(const char* date)
 	if (count != 2 || month == -1 || day == -1 || year == -1) { throw Data_TimeException(); }//своебразная проверка ввода ПОТОМ ИСПРАВИТЬ НА НОРМ ФУНКЦИЮ
 
 }
+
+//сравнение 
+bool data_time::operator ==(const data_time& r) const
+{
+	return (toJulian_date() == r.toJulian_date());
+}
+bool data_time::operator !=(const data_time& r) const
+{
+	return !(*this == r);
+}
+bool data_time::operator > (const data_time& r) const
+{
+	return (toJulian_date() > r.toJulian_date());
+}
+bool data_time::operator >= (const data_time& r) const
+{
+	return (toJulian_date() >= r.toJulian_date());
+}
+bool data_time::operator < (const data_time& r) const
+{
+	return (toJulian_date() < r.toJulian_date());
+}
+bool data_time::operator <= (const data_time& r) const
+{
+	return !(*this >= r);
+}
+
 
 //ввод, вывод
 ostream& operator <<(ostream& out, const data_time& str)

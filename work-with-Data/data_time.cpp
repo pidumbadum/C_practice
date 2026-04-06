@@ -2,26 +2,6 @@
 char months_name[][17] = { "января", "февраля", "марта", "апреля", "мая", "июня",
 							"июля", "августа", "сентября", "октября", "ноября", "декабря" };
 
-void find_DMY_index(char str[20])
-{
-	int count = 0;
-	char* slice;
-	int day, month, year;
-	for (int i = 0; i < 20; i++) {
-		if ((str[i] == ' ' || str[i] == '.') && count < 1) {
-			slice = &str[i + 1]; 
-			day = atoi(str);
-			month = atoi(slice);
-			count++;
-		}
-		if ((str[i] == ' ' || str[i] == '.') && count >= 1) {
-			slice = &str[i + 1];
-			year = atoi(slice);
-			count++;
-		}
-	}
-	if (count != 2) { throw Data_TimeException(); } //своебразная проверка ввода, если разделителей оказалась больше или меньше 2, то была допущена ошибка
-}
 void Copy_string(const char* str_in, int start, int end, char* str_out)
 {
 	if (start < 0 || end > 20 || start >= end) {
@@ -65,8 +45,12 @@ data_time::data_time()
 	year = 2001;
 	sec = 0;
 }
-data_time::data_time(const char* date) : data_time()// чтобы кампилятор не возмущался сначала инициализируем значения по умолчанию
+data_time::data_time(const char* date)
 {
+	day = -1; 
+	year = -1;
+	month = -1;
+	sec = 0;
 	int month_start_i = 0;
 	int count = 0;
 	const char* slice = date;
@@ -74,7 +58,7 @@ data_time::data_time(const char* date) : data_time()// чтобы кампиля
 		if ((date[i] == ' ' || date[i] == '.') && count < 1) {
 			slice = &date[i + 1];
 			day = atoi(date);
-			atoi(slice) != 0 ? month = atoi(slice):month_start_i = i+ 1;
+			atoi(slice) != 0 ? month = atoi(slice):month_start_i = i + 1;
 			count++;
 		}
 		else if (date[i] == ' ' || date[i] == '.') {
@@ -90,7 +74,7 @@ data_time::data_time(const char* date) : data_time()// чтобы кампиля
 
 	}
 
-	if (count != 2) { throw Data_TimeException(); }//своебразная проверка ввода
+	if (count != 2 || month == -1 || day == -1 || year == -1) { throw Data_TimeException(); }//своебразная проверка ввода ПОТОМ ИСПРАВИТЬ НА НОРМ ФУНКЦИЮ
 
 }
 
@@ -121,4 +105,25 @@ ostream& operator <<(ostream& out, const data_time& str)
 	out << str.year;
 	return out;
 }
-istream& operator >>(istream& in, data_time& str);
+istream& operator >>(istream& in, data_time& date) {
+	char date_str[26]; //Змаенить везде!!!!!я считать не умею
+	char symbol;
+	int i = 0;
+	while (i < 25 && in.get(symbol) && symbol != '\n' && symbol != '\r') {
+		date_str[i++] = symbol;
+	}
+	date_str[i] = '\0';
+
+	try {
+		data_time temporary_date(date_str);
+
+		date.day = temporary_date.day;
+		date.month = temporary_date.month;
+		date.year = temporary_date.year;
+		date.sec = temporary_date.sec;
+	}
+	catch (const Data_TimeException&) {
+		in.setstate(ios::failbit); // это не позволит ввести черти что, НО НУЖНО ДОДЕЛАТЬ ПРОВЕРКУ
+	}
+	return in; //не работает с "18 августа 2017" 
+}

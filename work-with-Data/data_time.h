@@ -2,7 +2,6 @@
 #include <iostream>
 #include <locale.h>
 using namespace std;
-//setlocale(LC_ALL, "ru");
 class Data_TimeException {};
 
 class data_time
@@ -14,7 +13,7 @@ public:
 	data_time(const char* date);
 	
 	//ввод, вывод
-	friend istream& operator >>(istream& in, data_time& str);
+	friend istream& operator >>(istream& in, data_time& date);
 	friend ostream& operator <<(ostream& out, const data_time& str);
 };
 

@@ -13,7 +13,7 @@ int main()
 	data_time date2;
 	cout << "Enter the second date: ";
 	cin >> date2;
-	data_time date3("18 августа 2017");
+	data_time date3("41 августа 2017");
 	cout << "First: " << basic<<endl;
 	cout << endl;
 	cout << "Second: " << date2 << endl;
@@ -23,6 +23,29 @@ int main()
 	cout << "Second != Third? " << (date2 != date3) << endl;
 	cout << "Second < Third? " << (date2 < date3) << endl;
 	cout << "Second > Third? " << (date2 > date3) << endl;
+
+	//проверка проверки ввода
+	try {
+		data_time check1("29.02.2000");
+		cout <<"Everything is allright!"<< check1 << endl; 
+	}
+	catch(Data_TimeException()){
+		cout << "test 1 Error" << endl;
+	}
+	try {
+		data_time check2("29.02.1400");
+		cout << "Everything is allright!" << check2 << endl;
+	}
+	catch (Data_TimeException()) {
+		cout << "test 2 Error" << endl;
+	}
+	try {
+		data_time check3("31.08.2001");
+		cout << "Everything is allright!" << check3 << endl;
+	}
+	catch (Data_TimeException()) {
+		cout << "test 3 Error" << endl;
+	}
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

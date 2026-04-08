@@ -1,6 +1,7 @@
 ﻿#include "data_time.h"
 char months_name[][17] = { "января", "февраля", "марта", "апреля", "мая", "июня",
 							"июля", "августа", "сентября", "октября", "ноября", "декабря" };
+char days31[] = "101010110101";
 
 void Copy_string(const char* str_in, int start, int end, char* str_out)
 {
@@ -36,6 +37,54 @@ int Find_months_index(char* month) {
 	}
 	return -1;
 }
+void find_DMY(const char* date, int* day, int* month, int* year) {
+	int month_start_i = 0;
+	int count = 0;
+	const char* slice = date;
+	for (int i = 0; date[i] != '\0'; i++) {
+		if ((date[i] == ' ' || date[i] == '.') && count < 1) {
+			slice = &date[i + 1];
+			*day = atoi(date);
+			atoi(slice) != 0 ? *month = atoi(slice) : month_start_i = i + 1;
+			count++;
+		}
+		else if (date[i] == ' ' || date[i] == '.') {
+			if (month_start_i != 0) {
+				char result[17];
+				Copy_string(date, month_start_i, i, result);
+				*month = Find_months_index(result);
+			}
+			slice = &date[i + 1];
+			*year = atoi(slice);
+			count++;
+		}
+
+	}
+}
+void find_YMDtime(const char* date, int* day, int* month, int* year) {
+	int month_start_i = 0;
+	int count = 0;
+	const char* slice = date;
+	for (int i = 0; date[i] != '\0'; i++) {
+		if ((date[i] == ' ' || date[i] == '.') && count < 1) {
+			slice = &date[i + 1];
+			*day = atoi(date);
+			atoi(slice) != 0 ? *month = atoi(slice) : month_start_i = i + 1;
+			count++;
+		}
+		else if (date[i] == ' ' || date[i] == '.') {
+			if (month_start_i != 0) {
+				char result[17];
+				Copy_string(date, month_start_i, i, result);
+				*month = Find_months_index(result);
+			}
+			slice = &date[i + 1];
+			*year = atoi(slice);
+			count++;
+		}
+
+	}
+}
 unsigned int data_time::toJulian_date() const {
 	//формула с вики
 	int a = (14 - month)/12;
@@ -44,6 +93,18 @@ unsigned int data_time::toJulian_date() const {
 	unsigned int jdn = day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
 	return jdn;
 }
+void data_time::Check_enters() const {
+	//самые простые исключения
+	if (month > 12 || month < 1 || day < 1 || year < 0 || day > 31){ throw Data_TimeException(); }
+	//февраль
+	if (month == 2 && (year % 4 == 0 || year % 400 == 0) && day > 29) {
+		throw Data_TimeException();
+	}
+	else if(month == 2 && (year % 4 != 0 || year % 400 != 0) && day > 28){ throw Data_TimeException(); }
+	//остальное
+	else if (days31[month-1] != '1' && day > 30) { throw Data_TimeException(); }
+}
+
 
 //Конструктор по умолчанию и  с параматерами:
 data_time::data_time()
@@ -54,37 +115,16 @@ data_time::data_time()
 	sec = 0;
 	day_week = 0;
 }
-data_time::data_time(const char* date)
+data_time::data_time(const char* date) : data_time()
 {
-	day = -1; 
-	year = -1;
-	month = -1;
-	sec = 0;
-	int month_start_i = 0;
-	int count = 0;
-	const char* slice = date;
-	for (int i = 0; date[i] != '\0'; i++) { 
-		if ((date[i] == ' ' || date[i] == '.') && count < 1) {
-			slice = &date[i + 1];
-			day = atoi(date);
-			atoi(slice) != 0 ? month = atoi(slice):month_start_i = i + 1;
-			count++;
-		}
-		else if (date[i] == ' ' || date[i] == '.') {
-			if (month_start_i != 0) {
-				char result[17];
-				Copy_string(date, month_start_i, i, result);
-				month = Find_months_index(result);
-			}
-			slice = &date[i + 1];
-			year = atoi(slice);
-			count++;
-		}
-
+	int i = 0;
+	while (date[i] == ' ' || date[i] == '.' || date[i] == '-')
+	{
+		(date[i] == ' ' || date[i] == '.') ? find_DMY(date, &day, &month, &year) : find_YMDtime(date, &day, &month, &year);
+		i++;
 	}
 
-	if (count != 2 || month == -1 || day == -1 || year == -1) { throw Data_TimeException(); }//своебразная проверка ввода ПОТОМ ИСПРАВИТЬ НА НОРМ ФУНКЦИЮ
-
+	Check_enters();
 }
 
 //сравнение 
@@ -117,12 +157,6 @@ bool data_time::operator <= (const data_time& r) const
 //ввод, вывод
 ostream& operator <<(ostream& out, const data_time& str)
 {
-
-	//проверить все возможные ошибки, например:
-					//1.диапазоны дат. в определенных месяцах 30 дней, 31, в Феврале 28 или 29.
-					//2.это не отрицательные значения, хотя з них можно сделать время до н.э. 
-					//3.они больше нуля(касается только месяцев и дней)
-					// Проверку можно вынести в отдельную функецию, чтобы пользоваться ею на всех этапах!!!
 	if (str.day < 10) {
 		out << 0 << str.day << '.';
 	}
@@ -157,9 +191,10 @@ istream& operator >>(istream& in, data_time& date) {
 		date.month = temporary_date.month;
 		date.year = temporary_date.year;
 		date.sec = temporary_date.sec;
+		date.Check_enters();
 	}
 	catch (const Data_TimeException&) {
-		in.setstate(ios::failbit); // это не позволит ввести черти что, НО НУЖНО ДОДЕЛАТЬ ПРОВЕРКУ
+		in.setstate(ios::failbit); // это не позволит ввести черти что
 	}
 	return in; //не работает с "18 августа 2017" 
 }

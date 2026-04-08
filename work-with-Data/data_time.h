@@ -7,6 +7,7 @@ class Data_TimeException {};
 class data_time
 {	
 	unsigned int toJulian_date() const;
+	void Check_enters() const;
 	int day, month, year, sec, day_week;
 public:
 	//Конструктор по умолчанию и  с параматерами:

@@ -18,16 +18,22 @@ int main()
 	cout << "Enter the second date: ";
 	cin >> date2;
 	date_time date3("2021-12-21T07:54:34");
+	date_time date4("2021-12-21T18:20:40");
 	cout << "First: " << basic<<endl;
-	cout << endl;
-	cout << "Second: " << date2 << endl;
-	cout << endl;
-	cout << "Third: " << date3 << endl;
+	cout << endl << "Second: " << date2 << endl;
+	cout << endl<< "Third: " << date3 << endl;
+	cout << endl << "Four: " << date4 << endl;
 	cout << endl << "Cheking comparison operators:" << endl;
 	cout << "Second = Third? " << (date2 == date3) <<endl;
 	cout << "Second != Third? " << (date2 != date3) << endl;
 	cout << "Second < Third? " << (date2 < date3) << endl;
 	cout << "Second > Third? " << (date2 > date3) << endl;
+	cout << endl << "Cheking comparison operators with time:" << endl;
+	cout << "Third = Four " << (date3 == date4) << endl;
+	cout << "Third != Four " << (date3 != date4) << endl;
+	cout << "Third < Four " << (date3 < date4) << endl;
+	cout << "Third > Four " << (date3 > date4) << endl;
+
 
 	//проверка проверки ввода
 	cout << endl << "Input validation:" << endl;

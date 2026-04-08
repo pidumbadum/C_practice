@@ -6,7 +6,7 @@ class date_TimeException {};
 
 class date_time
 {	
-	unsigned int toJulian_date() const;
+	double toJulian_date() const;
 	void Check_enters() const;
 	int day, month, year, sec, day_week;
 public:

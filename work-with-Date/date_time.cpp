@@ -64,7 +64,6 @@ void find_DMY(const char* date, int* day, int* month, int* year) {
 		}
 	}
 }
-
 void find_YMDtime(const char* date, int* day, int* month, int* year, int* sec) {
 	*day = 1;
 	*month = 1;
@@ -104,12 +103,20 @@ void find_YMDtime(const char* date, int* day, int* month, int* year, int* sec) {
 	}
 }
 
-unsigned int date_time::toJulian_date() const {
+double date_time::toJulian_date() const {
 	//формула с вики
 	int a = (14 - month)/12;
 	int y = year + 4800 - a;
 	int m = month + 12 * a - 3;
-	unsigned int jdn = day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+	double jdn = day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
+
+	//секунды
+	double h = sec / 3600.0;
+	double mi = (sec % 3600) / 60.0;
+	double s= (sec % 3600) % 60;
+	double jd = (h - 12) / 24 + mi / 1440 + s / 86400;
+	jd < 0 ? jd *= -1 : jd;
+	jdn += jd;
 	return jdn;
 }
 void date_time::Check_enters() const {

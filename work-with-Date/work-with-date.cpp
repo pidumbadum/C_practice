@@ -19,6 +19,7 @@ int main()
 	cin >> date2;
 	date_time date3("2021-12-21T07:54:34");
 	date_time date4("2021-12-21T18:20:40");
+	cout << endl << "Difference between first date and second date: " << basic.dates_diff(date2)<<endl;
 	cout << "First: " << basic<<endl;
 	cout << endl << "Second: " << date2 << endl;
 	cout << endl<< "Third: " << date3 << endl;
@@ -59,11 +60,11 @@ int main()
 		cout << "test 31.08.2001 Error" << endl;
 	}
 	try {
-		date_time check4("31.09.2001");
-		cout << "31.09.2001 is allright!" << endl;
+		date_time check4("2021-12-21T25:00:40");
+		cout << "2021-12-21T25:00:40 is allright!" << endl;
 	}
 	catch (date_TimeException&) {
-		cout << "test 31.09.2001 Error" << endl;
+		cout << "test 2021-12-21T25:00:40 Error" << endl;
 	}
 }
 

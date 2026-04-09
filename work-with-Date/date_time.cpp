@@ -103,6 +103,7 @@ void find_YMDtime(const char* date, int* day, int* month, int* year, int* sec) {
 	}
 }
 
+//Вспомогательные
 double date_time::toJulian_date() const {
 	//формула с вики
 	int a = (14 - month)/12;
@@ -127,10 +128,11 @@ void date_time::Check_enters() const {
 		throw date_TimeException();
 	}
 	else if(month == 2 && (year % 4 != 0 || year % 400 != 0) && day > 28){ throw date_TimeException(); }
-	//остальное
+	//месяцы
 	else if (days31[month-1] != '1' && day > 30) { throw date_TimeException(); }
+	//Время
+	if (sec < 0 || sec > 86399 || sec / 3600 > 23 || (sec % 3600) / 60 > 59 || (sec % 3600) % 60 > 59) { throw date_TimeException(); }
 }
-
 
 //Конструктор по умолчанию и  с параматерами:
 date_time::date_time()
@@ -153,6 +155,16 @@ date_time::date_time(const char* date)
 		}
 	}
 	Check_enters();
+}
+
+//арифметические операции 
+// нету
+
+//разница между датами в днях
+int date_time::dates_diff(const date_time& date1) {
+	int diff = toJulian_date() - date1.toJulian_date();
+	if (diff < 0) diff = -diff;
+	return diff;
 }
 
 //сравнение 

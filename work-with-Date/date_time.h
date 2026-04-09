@@ -13,7 +13,12 @@ public:
 	//Конструктор по умолчанию и  с параматерами:
 	date_time();
 	date_time(const char* date);
+
+	//арифметические операции
 	
+	//разница между датами в днях
+	int dates_diff(const date_time &date1);
+
 	//сравнение
 	bool operator == (const date_time& r) const;
 	bool operator != (const date_time& r) const;

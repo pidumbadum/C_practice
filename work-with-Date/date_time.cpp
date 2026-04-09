@@ -157,8 +157,15 @@ date_time::date_time(const char* date)
 	Check_enters();
 }
 
-//арифметические операции 
-// нету
+//Конструктор копирования
+date_time date_time:: operator = (const date_time& date) {
+	day = date.day;
+	month = date.month;
+	year = date.year;
+	sec = date.sec;
+	day_week = date.day_week;
+	Check_enters();
+}
 
 //разница между датами в днях
 int date_time::dates_diff(const date_time& date1) {

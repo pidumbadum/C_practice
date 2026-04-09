@@ -15,6 +15,9 @@ public:
 	date_time(const char* date);
 
 	//арифметические операции
+	date_time operator = (const date_time& date);
+	date_time operator += (const int& days);
+	date_time operator += (const int& days);
 	
 	//разница между датами в днях
 	int dates_diff(const date_time &date1);

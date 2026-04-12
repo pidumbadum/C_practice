@@ -15,15 +15,21 @@ int main()
 	//18 августа 2017
 	date_time basic;
 	date_time date2;
-	cout << "Enter the second date: ";
-	cin >> date2;
 	date_time date3("2021-12-21T07:54:34");
 	date_time date4("2021-12-21T18:20:40");
-	cout << endl << "Difference between first date and second date: " << basic.dates_diff(date2)<<endl;
-	cout << "First: " << basic<<endl;
+	cout << "Enter the second date: ";
+	cin >> date2;
+	char ans;
+	cout << "Хотите знать день недели введеной даты? y/n ";
+	cin >> ans;
+	if (ans == 'y'){cout<<"\nДень недели - "<< date2.day_of_week() << endl;}
+
+	cout << "\nFirst: " << basic<<endl;
 	cout << endl << "Second: " << date2 << endl;
+	cout << "\nDifference between first date and second date: " << basic.dates_diff(date2) << endl;
 	cout << endl<< "Third: " << date3 << endl;
 	cout << endl << "Four: " << date4 << endl;
+
 	cout << endl << "Cheking comparison operators:" << endl;
 	cout << "Second = Third? " << (date2 == date3) <<endl;
 	cout << "Second != Third? " << (date2 != date3) << endl;
@@ -34,7 +40,6 @@ int main()
 	cout << "Third != Four " << (date3 != date4) << endl;
 	cout << "Third < Four " << (date3 < date4) << endl;
 	cout << "Third > Four " << (date3 > date4) << endl;
-
 
 	//проверка проверки ввода
 	cout << endl << "Input validation:" << endl;

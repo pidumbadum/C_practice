@@ -2,6 +2,15 @@
 char months_name[][17] = { "января", "февраля", "марта", "апреля", "мая", "июня",
 							"июля", "августа", "сентября", "октября", "ноября", "декабря" };
 char days31[] = "101010110101";
+char days_name[][23] = {
+	"понедельник",
+	"вторник",
+	"среда",
+	"четверг",
+	"пятница",
+	"суббота",
+	"воскресенье"
+};
 
 void Copy_string(const char* str_in, int start, int end, char* str_out)
 {
@@ -165,13 +174,19 @@ date_time date_time:: operator = (const date_time& date) {
 	sec = date.sec;
 	day_week = date.day_week;
 	Check_enters();
+	return *this;
 }
 
 //разница между датами в днях
-int date_time::dates_diff(const date_time& date1) {
+int date_time::dates_diff(const date_time& date1) const {
 	int diff = toJulian_date() - date1.toJulian_date();
 	if (diff < 0) diff = -diff;
 	return diff;
+}
+//день недели
+const char* date_time::day_of_week() {
+	int day_i = (int(toJulian_date()) % 7);
+	return days_name[day_i];
 }
 
 //сравнение 

@@ -14,13 +14,12 @@ public:
 	date_time();
 	date_time(const char* date);
 
-	//арифметические операции
 	date_time operator = (const date_time& date);
-	date_time operator += (const int& days);
-	date_time operator += (const int& days);
 	
 	//разница между датами в днях
-	int dates_diff(const date_time &date1);
+	int dates_diff(const date_time &date1) const;
+	//день недели
+	const char* day_of_week();
 
 	//сравнение
 	bool operator == (const date_time& r) const;

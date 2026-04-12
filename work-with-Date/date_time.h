@@ -8,7 +8,7 @@ class date_time
 {	
 	double toJulian_date() const;
 	void Check_enters() const;
-	int day, month, year, sec, day_week;
+	int day, month, year, sec;
 public:
 	//Конструктор по умолчанию и  с параматерами:
 	date_time();
@@ -20,6 +20,9 @@ public:
 	int dates_diff(const date_time &date1) const;
 	//день недели
 	const char* day_of_week();
+	//Дата пасхи
+	static date_time Easter_date(int year);
+
 
 	//сравнение
 	bool operator == (const date_time& r) const;

@@ -71,6 +71,14 @@ int main()
 	catch (date_TimeException&) {
 		cout << "test 2021-12-21T25:00:40 Error" << endl;
 	}
+
+	//Дата пасхи
+	int year;
+	cout << "\nВведите год, для которого хотите найти дату пасхи: ";
+	cin >> year;
+	cout << "Дата пасхи:"<<endl;
+	date_time eaust = date_time::Easter_date(year);
+	cout << eaust;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

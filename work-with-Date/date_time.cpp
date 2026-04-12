@@ -150,7 +150,6 @@ date_time::date_time()
 	month = 1;
 	year = 2001;
 	sec = 0;
-	day_week = 0;
 }
 date_time::date_time(const char* date)
 {
@@ -172,7 +171,6 @@ date_time date_time:: operator = (const date_time& date) {
 	month = date.month;
 	year = date.year;
 	sec = date.sec;
-	day_week = date.day_week;
 	Check_enters();
 	return *this;
 }
@@ -187,6 +185,29 @@ int date_time::dates_diff(const date_time& date1) const {
 const char* date_time::day_of_week() {
 	int day_i = (int(toJulian_date()) % 7);
 	return days_name[day_i];
+}
+//Дата пасхи
+date_time date_time::Easter_date(int year) {
+	date_time res;
+	int a = year % 19;
+	int b = year % 4;
+	int c = year % 7;
+	int d = (19*a + 15) % 30;
+	int e = (2*b + 4*c + 6*d + 6)% 7;
+	if ((d + e) < 27) {
+		res.day = 4 + d + e;
+		res.month = 4;
+		res.year = year;
+		res.sec = 0;
+	}
+	else {
+		res.day = d+e - 26;
+		res.month = 5;
+		res.year = year;
+		res.sec = 0;
+	}
+	res.Check_enters();
+	return res;
 }
 
 //сравнение 

@@ -1,13 +1,12 @@
-﻿#pragma once
-#include <iostream>
+﻿#include <iostream>
 #include "CircularListItem.h"
 using namespace std;
 class CircularListException {};
 
-template <class T> class CircularList 
+template <class T> class CircularList
 {
 	CircularListitem<T>* start; // Начало списка
-	CircularList(const CircularList& list); 
+	CircularList(const CircularList& list);
 	//CircularList& operator =(const CircularList& list); НЕ ЗАБУДЬ ДОДЛАТЬ
 public:
 	//Конструктор по умолчанию
@@ -16,7 +15,7 @@ public:
 	~CircularList();
 	CircularListitem<T>* getStart() const { return start; };
 	//Удаление
-	void deleteFirst(); 
+	void deleteFirst();
 	void deleteAfter(CircularListitem<T>* ptr);
 	//добавление
 	void insertFirst(const T& data);
@@ -74,13 +73,14 @@ template <class T> void CircularList<T>::insertFirst(const T& data)
 	if (start) {
 		CircularListitem<T>* second = start;
 		start = new CircularListitem<T>(data, second);
+		if (second->next == second) { second->next = start; }
 	}
 	else {
 		start = new CircularListitem<T>(data, nullptr);
 		start->next = start;
 	}
 }
-template <class T> void CircularList<T>::insertAfter(CircularListitem<T>* ptr, const T& data) 
+template <class T> void CircularList<T>::insertAfter(CircularListitem<T>* ptr, const T& data)
 {
 	if (ptr) {
 		CircularListitem<T>* temp = ptr->next;
@@ -94,10 +94,10 @@ template <class T> ostream& operator <<(ostream& out, CircularList<T>& list)
 	CircularListitem<T>* ptr = list.getStart();
 	if (!ptr)
 		out << "EMPTY ";
-	else while (ptr)
+	else do
 	{
 		out << ptr->getData() << ' ';
 		ptr = ptr->getNext();
-	}
+	} while (ptr != list.getStart());
 	return out;
 }

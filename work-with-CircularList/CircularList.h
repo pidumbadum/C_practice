@@ -66,10 +66,10 @@ template <class T> void CircularList<T>::deleteAfter(CircularListitem<T>* ptr)
 		else {
 			CircularListitem<T>* temp = ptr->next;
 			ptr->next = ptr->next->next;
-			delete temp;
 			if (temp == end) {
 				end = ptr;
 			}
+			delete temp;
 		}
 	}
 	else throw CircularListException();
@@ -109,7 +109,7 @@ template <class T> ostream& operator <<(ostream& out, CircularList<T>& list)
 		do {
 			out << ptr->getData() << ' ';
 			ptr = ptr->getNext();
-		} while (ptr); 
+		} while (ptr != list.getStart());
 	}
 	return out;
 }

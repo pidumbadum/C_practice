@@ -7,24 +7,49 @@
 #include "CircularList.h"
 #include <chrono>
 using namespace std;
+using namespace chrono;
+
+
 
 int main()
 {
 
-    setlocale(LC_ALL, "Russian");
-    CircularList<int> list; // Указываем, список какого типа
-    cout << "Start: " << list << endl;
-    list.insertFirst(10);
-    cout << list.getStart()->getNext()->getData();
-    CircularListitem<int>* ptr = list.getStart();
-    //list.insertAfter(ptr, 15);
-    list.insertFirst(15);
-    cout << list;
-    //list.insertAfter(ptr->getNext(), 12);
-    //list.insertFirst(7);
-    //cout << "Step 1: " << list << endl;
-    //cout << "Chek the circular list:\n";
-    //cout << ptr;
+    //setlocale(LC_ALL, "Russian");
+    int sizes[] = { 1000, 5000, 10000, 50000, 100000, 500000, 1000000};
+    int num_tests = 7;  // Сколько размеров в массиве
+    int k = 3;
+    /*cout << "Enter the k: ";
+    cin >> k;*/
+
+    for (int t = 0; t < num_tests; t++) {
+        int SIZE = sizes[t];  // Берём текущий размер
+        CircularList<int> list;
+
+        //Cоздаем список:
+        for (int i = 0; i < SIZE; i++) {
+            CircularListitem<int>* ptr = list.getEnd();
+            if (!ptr) {
+                list.insertFirst(i + 1);
+            }
+            else {
+                list.insertAfter(ptr, i + 1);
+            }
+        }
+        auto start = chrono::high_resolution_clock::now(); //засекли
+        //Удаляем каждый третий, пока не сотанется один
+        while (list.getStart() != list.getEnd()) {
+            for (int step = 0; step < k; step++) {
+                //тут надо менять новую ссылку столько раз, чтоб она равнялась n-1 элементу списка
+                // если тот, который нужно удалить = n
+            }
+        }
+
+        auto end = chrono::high_resolution_clock::now(); //стоп
+        chrono::duration<double> diff = end - start;
+        cout << "Время(сек.)     Длина списка" << endl;
+        cout << diff.count() <<"c." << "        " << SIZE << endl;
+    }
+    
     return 0;
 
 }

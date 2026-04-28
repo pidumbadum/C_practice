@@ -6,7 +6,8 @@ class CircularListException {};
 template <class T> class CircularList
 {
 	CircularListitem<T>* start; // Начало списка
-	CircularList(const CircularList& list);
+	CircularListitem<T>* end; // Конец списка
+	//CircularList(const CircularList& list); //конструктор копирования, пока пусть поивисит
 	//CircularList& operator =(const CircularList& list); НЕ ЗАБУДЬ ДОДЛАТЬ
 public:
 	//Конструктор по умолчанию
@@ -28,6 +29,7 @@ public:
 template <class T> CircularList<T>::CircularList()
 {
 	start = 0;
+	end = 0
 }
 //Деструктор
 template <class T> CircularList<T>::~CircularList()
@@ -40,13 +42,14 @@ template <class T> void CircularList<T>::deleteFirst()
 {
 	if (start)
 	{
-		CircularListitem<T>* temp = start->next;
-
-		if (temp == start) {
+		if (start == end) {
 			delete start;
-			start = nullptr;
+			start = nullptr; 
+			end = nullptr;
 		}
 		else {
+			CircularListitem<T>* temp = start->next;
+			end->next = temp;
 			delete start;
 			start = temp;
 		}

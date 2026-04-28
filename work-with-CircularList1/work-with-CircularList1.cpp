@@ -15,13 +15,16 @@ int main()
     CircularList<int> list; // Указываем, список какого типа
     cout << "Start: " << list << endl;
     list.insertFirst(10);
+    cout << list.getStart()->getNext()->getData();
     CircularListitem<int>* ptr = list.getStart();
-    list.insertAfter(ptr, 15);
-    list.insertAfter(ptr->getNext(), 12);
-    list.insertFirst(7);
-    cout << "Step 1: " << list << endl;
-    cout << "Chek the circular list:\n";
-    cout << ptr;
+    //list.insertAfter(ptr, 15);
+    list.insertFirst(15);
+    cout << list;
+    //list.insertAfter(ptr->getNext(), 12);
+    //list.insertFirst(7);
+    //cout << "Step 1: " << list << endl;
+    //cout << "Chek the circular list:\n";
+    //cout << ptr;
     return 0;
 
 }

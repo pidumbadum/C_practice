@@ -20,7 +20,36 @@ int main()
     int k = 3;
     /*cout << "Enter the k: ";
     cin >> k;*/
+    k--;
 
+    //small test
+    //CircularList<int> list;
+    //for (int i = 0; i < 13; i++) {
+    //        CircularListitem<int>* ptr = list.getEnd();
+    //        if (!ptr) {
+    //            list.insertFirst(i + 1);
+    //        }
+    //        else {
+    //            list.insertAfter(ptr, i + 1);
+    //        }
+    //    }
+
+    //CircularListitem<int>* ptr_k = list.getStart();
+    //    bool flag = false;
+    //    while (list.getStart() != list.getEnd()) {
+    //        for (int step = 0; step < k; step++) {
+    //            //тут надо менять новую ссылку столько раз, чтоб она равнялась n-1 элементу списка
+    //            // если тот, который нужно удалить = n
+    //            if (flag) {
+    //                ptr_k = ptr_k->getNext();
+    //            }
+    //            else { flag = true; }
+    //        }
+    //        list.deleteAfter(ptr_k);
+    //    }
+    //    cout << list;
+
+    cout << "Время(сек.)     Длина списка" << endl;
     for (int t = 0; t < num_tests; t++) {
         int SIZE = sizes[t];  // Берём текущий размер
         CircularList<int> list;
@@ -37,21 +66,26 @@ int main()
         }
         auto start = chrono::high_resolution_clock::now(); //засекли
         //Удаляем каждый третий, пока не сотанется один
+        CircularListitem<int>* ptr_k = list.getStart();
+        bool flag = false;
         while (list.getStart() != list.getEnd()) {
             for (int step = 0; step < k; step++) {
                 //тут надо менять новую ссылку столько раз, чтоб она равнялась n-1 элементу списка
                 // если тот, который нужно удалить = n
+                if (flag) {
+                    ptr_k = ptr_k->getNext();
+                }
+                else { flag = true; }
             }
+            list.deleteAfter(ptr_k);
         }
 
         auto end = chrono::high_resolution_clock::now(); //стоп
         chrono::duration<double> diff = end - start;
-        cout << "Время(сек.)     Длина списка" << endl;
         cout << diff.count() <<"c." << "        " << SIZE << endl;
     }
     
     return 0;
-
 }
 
 

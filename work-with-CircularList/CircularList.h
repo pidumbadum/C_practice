@@ -29,7 +29,7 @@ public:
 template <class T> CircularList<T>::CircularList()
 {
 	start = 0;
-	end = 0
+	end = 0;
 }
 //Деструктор
 template <class T> CircularList<T>::~CircularList()
@@ -66,6 +66,9 @@ template <class T> void CircularList<T>::deleteAfter(CircularListitem<T>* ptr)
 			CircularListitem<T>* temp = ptr->next;
 			ptr->next = ptr->next->next;
 			delete temp;
+			if (temp == end) {
+				end = ptr;
+			}
 		}
 	}
 	else throw CircularListException();
@@ -76,11 +79,12 @@ template <class T> void CircularList<T>::insertFirst(const T& data)
 	if (start) {
 		CircularListitem<T>* second = start;
 		start = new CircularListitem<T>(data, second);
-		if (second->next == second) { second->next = start; }
+		end->next = start;
 	}
 	else {
 		start = new CircularListitem<T>(data, nullptr);
 		start->next = start;
+		end = start;
 	}
 }
 template <class T> void CircularList<T>::insertAfter(CircularListitem<T>* ptr, const T& data)
@@ -88,19 +92,23 @@ template <class T> void CircularList<T>::insertAfter(CircularListitem<T>* ptr, c
 	if (ptr) {
 		CircularListitem<T>* temp = ptr->next;
 		ptr->next = new CircularListitem<T>(data, temp);
+		if (ptr == end) { end = ptr->next; }
 	}
+	else throw CircularListException();
 }
 //опретаоры ввода и вывода
 template <class T> ostream& operator <<(ostream& out, CircularList<T>& list)
 {
-
 	CircularListitem<T>* ptr = list.getStart();
-	if (!ptr)
+
+	if (!ptr) {
 		out << "EMPTY ";
-	else do
-	{
-		out << ptr->getData() << ' ';
-		ptr = ptr->getNext();
-	} while (ptr != list.getStart());
+	}
+	else {
+		do {
+			out << ptr->getData() << ' ';
+			ptr = ptr->getNext();
+		} while (ptr != list.getStart()); 
+	}
 	return out;
 }

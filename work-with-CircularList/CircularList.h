@@ -15,6 +15,7 @@ public:
 	//Деструктор
 	~CircularList();
 	CircularListitem<T>* getStart() const { return start; };
+	CircularListitem<T>* getEnd() const { return end; };
 	//Удаление
 	void deleteFirst();
 	void deleteAfter(CircularListitem<T>* ptr);
@@ -108,7 +109,7 @@ template <class T> ostream& operator <<(ostream& out, CircularList<T>& list)
 		do {
 			out << ptr->getData() << ' ';
 			ptr = ptr->getNext();
-		} while (ptr != list.getStart()); 
+		} while (ptr); 
 	}
 	return out;
 }

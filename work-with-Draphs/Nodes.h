@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <iostream>
-#include <set> 
+#include <set> //глянуть как работает
 
 class Node {
 private:

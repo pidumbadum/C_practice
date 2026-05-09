@@ -21,19 +21,19 @@ typedef set<Node\*>::const\_iterator node\_iterator;
 
 for (Graph::node\_iterator node = graph.begin(); node != graph.end(); ++node) {
 
-&#x20;   cout <<"\\nЭлемент: "<< (\*node)->getName() << endl;
+  cout <<"\\nЭлемент: "<< (\*node)->getName() << endl;
 
-&#x20;   cout << "Связи:";
+  cout << "Связи:";
 
-&#x20;   // Используем const auto\& для экономии ресурсов
-
-&#x20;   for (const auto\& element : graph.nb\_names(\*node)) {
-
-&#x20;       cout << element << " ";
-
-&#x20;   }
-
-&#x20;   cout << "\\n--------------------";
+  // Используем const auto\& для экономии ресурсов
+  
+  for (const auto\& element : graph.nb\_names(\*node)) {
+  
+    cout << element << " ";
+  
+  }
+  
+  cout << "\\n--------------------";
 
 }
 ```
@@ -45,7 +45,7 @@ Graph::node\_iterator - обычно на этом месте пишем тип 
 ```C++
 for (const auto\& element : graph.nb\_names(\*node)) {
 
-&#x20;    cout << element << " ";
+    cout << element << " ";
 
 }
 ```

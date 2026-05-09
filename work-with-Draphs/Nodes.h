@@ -10,7 +10,7 @@ private:
 	set<Node*> neighbours;
 	void addNeighbour(Node* neighbour);
 	void removeNeighbour(Node* neighbour);
-
+	set<string> get_nb_name() const;
 	typedef set<Node*>::const_iterator node_iterator;
 public:
 	Node(const string& aname) : name(aname) {}

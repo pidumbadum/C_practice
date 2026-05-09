@@ -1,4 +1,4 @@
-###### ***Выражение set<Node\*>::iterator в C++ — это тип данных (итератор),*** 
+##### ***Выражение set<Node\*>::iterator в C++ — это тип данных (итератор),***
 
 используемый для перебора элементов во множестве (std::set), которое хранит указатели на объекты Node
 
@@ -12,5 +12,43 @@
 
 
 
-typedef set<Node\*>::const\_iterator node\_iterator; дорожная 34
+typedef set<Node\*>::const\_iterator node\_iterator;
+
+
+
+##### Пример с node\_iterator
+
+for (Graph::node\_iterator node = graph.begin(); node != graph.end(); ++node) {
+
+&#x20;   cout <<"\\nЭлемент: "<< (\*node)->getName() << endl;
+
+&#x20;   cout << "Связи:";
+
+&#x20;   // Используем const auto\& для экономии ресурсов
+
+&#x20;   for (const auto\& element : graph.nb\_names(\*node)) {
+
+&#x20;       cout << element << " ";
+
+&#x20;   }
+
+&#x20;   cout << "\\n--------------------";
+
+}
+
+
+
+Graph::node\_iterator - обычно на этом месте пишем тип прибираемого объекта, например int i. Мне лень объяснять потом напишу надеюсь или разберусь на месте по примеру.
+
+
+
+#### Короткая запись без итераторов
+
+for (const auto\& element : graph.nb\_names(\*node)) {
+
+&#x20;    cout << element << " ";
+
+}
+
+Прикольно, потом разберусь 
 

@@ -3,12 +3,49 @@
 
 #include <iostream>
 #include <locale>
+#include <string>
+#include <set>
+#include "Graph.h"
 using namespace std;
 
 int main()
 {
     setlocale(LC_ALL, "ru");
-    cout << "ПРИвет\n";
+    cout << "Привет. Это тест графа\n";
+    Graph graph;
+    Node* a = new Node("A");
+    Node* b = new Node("B");
+    Node* c = new Node("C");
+    Node* d = new Node("D");
+
+    graph.addNode(a);
+    graph.addNode(b);
+    graph.addNode(c);
+    graph.addNode(d);
+
+    graph.addEdge(a, b);  // A - B
+    graph.addEdge(b, c);  // B - C
+    graph.addEdge(a, d);  // A - D
+    graph.addEdge(d, b);  // D - B
+
+    cout << "Все узлы в графе:\n";
+    for (Graph::node_iterator node = graph.begin(); node != graph.end(); ++node) {
+        cout << (*node)->getName() << endl;
+    }
+    cout << endl;
+
+    cout << "Связи в графе:";
+    for (Graph::node_iterator node = graph.begin(); node != graph.end(); ++node) {
+        cout <<"\nЭлемент: "<< (*node)->getName() << endl;
+        cout << "Связи:";
+        // Используем const auto& для экономии ресурсов
+        for (const auto& element : graph.nb_names(*node)) {
+            cout << element << " ";
+        }
+        cout << "\n--------------------";
+    }
+
+    return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

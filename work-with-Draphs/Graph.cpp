@@ -1,6 +1,11 @@
 ﻿#include "Graph.h"
 using namespace std;
+class GraphExeption {};
 
+
+//Graph::Graph() {
+//	nodes;
+//}
 void Graph::addNode(Node* node) {
 	nodes.insert(node);
 }
@@ -8,7 +13,7 @@ void Graph::removeNode(Node* node) {
 	nodes.erase(node); //Удаление из списка
 	// Remove also from all neighbours list
 	for (set<Node*>::iterator it = nodes.begin(); it != nodes.end(); it++) {
-		(*it)->removeNeighbour(node); //цикл проходится по всем узлам и удалает из соседей указатель на удаленный объект...
+		(*it)->removeNeighbour(node); //цикл проходится по всем узлам и удалает из соседей указатель на удаленный объект
 	}
 }
 void Graph::addEdge(Node* begin, Node* end) {
@@ -29,4 +34,9 @@ void Graph::removeEdge(Node* begin, Node* end) {
 	if (begin->neighbours.find(end) == begin->neighbours.end()) return;
 	begin->neighbours.erase(end);
 	end->neighbours.erase(begin);
+}
+set<string> Graph::nb_names(Node* node) {
+	if (nodes.find(node) == nodes.end())
+		throw GraphExeption();
+	return node->get_nb_name();
 }

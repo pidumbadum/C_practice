@@ -4,13 +4,13 @@
 #include "Nodes.h"
 using namespace std;
 
-//прикольная строка, которая позволяет не писать каждый раз "set<Node*>::const_iterator", 
-// а вместо этого только node_iterator
-typedef set<Node*>::const_iterator node_iterator;
-
 class Graph {
 private:
 	set<Node*> nodes; //что такое ыэт надо глянуть
+
+	//прикольная строка, которая позволяет не писать каждый раз "set<Node*>::const_iterator", 
+	// а вместо этого только node_iterator
+	typedef set<Node*>::const_iterator node_iterator;
 public:
 	void addNode(Node* node);
 	void removeNode(Node* node);

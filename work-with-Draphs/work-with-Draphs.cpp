@@ -2,10 +2,13 @@
 //
 
 #include <iostream>
+#include <locale>
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    setlocale(LC_ALL, "ru");
+    cout << "ПРИвет\n";
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

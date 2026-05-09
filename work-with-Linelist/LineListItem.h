@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 template <class T> class LineListElem
 {
@@ -8,12 +8,12 @@ public:
 	LineListElem(const T& adata, LineListElem* anext);
 	const T& getData() const;
 	LineListElem* getNext();
-	// В объявлениях друзей
-	// template повторяется
+	// Р’ РѕР±СЉСЏРІР»РµРЅРёСЏС… РґСЂСѓР·РµР№
+	// template РїРѕРІС‚РѕСЂСЏРµС‚СЃСЏ
 	template <class T> friend class LineList;
 };
 
-//Определения функций:
+//Р Р°Р±РѕС‚Р° СЃ СЌР»РµРјРµРЅС‚Р°РјРё СЃРїРёСЃРєР°:
 template <class T> LineListElem<T>::LineListElem(const T& adata, LineListElem<T>* anext)
 {
 	data = adata;

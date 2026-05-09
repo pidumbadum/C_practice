@@ -1,25 +1,35 @@
 ﻿// work-with-Linelist.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
+
 #include <iostream>
+#include <locale>
 #include "LineList.h"
 #include <chrono>
 using namespace std;
 
 int main()
 {
+
     setlocale(LC_ALL, "Russian");
     LineList<int> list; // Указываем, список какого типа
-    cout << "Начало: " << list << endl;
-    /*list.insertFirst(10);
+    cout << "Start: " << list << endl;
+    list.insertFirst(10);
     LineListElem<int>* ptr = list.getStart();
     list.insertAfter(ptr, 15);
     list.insertAfter(ptr->getNext(), 12);
     list.insertFirst(7);
-    cout << "Шаг 1: " << list << endl;*/
+    cout << "Step 1: " << list << endl;
+    list.deleteFirst();
+    list.deleteAfter(ptr);
+    cout << "Step 2(After deleted): " << list << endl;
+    list.insertFirst(8);
+    list.insertAfter(ptr, 69);
+    cout << "Step 3(new insert): " << list << endl;
     return 0;
 
 }
+
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"

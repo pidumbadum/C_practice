@@ -1,40 +1,24 @@
-﻿// массив1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
-#include <locale>
+﻿#include <iostream>
+#include <clocale>
+#include "Field.h"
 using namespace std;
 
-int main()
+int main(void)
 {
-    setlocale(LC_ALL, "RU");
-    int massiv[100];
-    int dlina;
-    cout << "Введите длину числа М: ";
-    cin >> dlina;
-
-    cout << "Введите М от меньшего разряда к большему(Через пробел):\n";
-    for (int i = 0; i < dlina; i++) {
-        cin >> massiv[i];
-    }
-    
-    int edenica = 1;
-    
-    for (int i = 0; i < dlina; i++) {
-        int sum = massiv[i] + edenica;
-        massiv[i] = sum % 2;
-        edenica = sum / 2;
-    }
-    if (edenica == 1) {
-        massiv[dlina] = edenica;
-        dlina++;
-    }
-    for (int i = 0; i < dlina; i++) {
-        cout << massiv[i];
-
-    }
+	//setlocale(LC_ALL, "Russian");
+	Field field(true);
+	while (!field.isOver())
+	{
+		field.print();
+		cout << "Ходит " <<
+			(field.isRedTurnNow() ? "красный" : "желтый") <<
+			" игрок, введите ход (1-7)" << endl;
+		int column; cin >> column;
+		field.makeTurn(column);
+	}
+	field.printResult();
+	return 0;
 }
-
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 

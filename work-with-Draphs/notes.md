@@ -17,6 +17,7 @@ typedef set<Node\*>::const\_iterator node\_iterator;
 
 
 ##### Пример с node\_iterator
+```C++
 
 for (Graph::node\_iterator node = graph.begin(); node != graph.end(); ++node) {
 
@@ -35,20 +36,18 @@ for (Graph::node\_iterator node = graph.begin(); node != graph.end(); ++node) {
 &#x20;   cout << "\\n--------------------";
 
 }
-
-
-
+```
 Graph::node\_iterator - обычно на этом месте пишем тип прибираемого объекта, например int i. Мне лень объяснять потом напишу надеюсь или разберусь на месте по примеру.
 
 
 
 #### Короткая запись без итераторов
-
+```C++
 for (const auto\& element : graph.nb\_names(\*node)) {
 
 &#x20;    cout << element << " ";
 
 }
-
+```
 Прикольно, потом разберусь 
 

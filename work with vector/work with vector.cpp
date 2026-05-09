@@ -53,12 +53,12 @@ int main()
     k--;
     
     auto start = chrono::high_resolution_clock::now(); //засекли
-    while (arr1.size != 1)
+    /*while (arr1.size != 1)
     {
         i = (i + k) % arr1.size;
         arr1.remove(i);
     }
-    cout << arr1;
+    cout << arr1;*/
    
     /*while (arr2.size != 1)
     {
@@ -95,12 +95,12 @@ int main()
     }
     cout << arr6;*/
     
-    /*while (arr7.size != 1)
+    while (arr7.size != 1)
     {
         i = (i + k) % arr7.size;
         arr7.remove(i);
     }
-    cout << arr7;*/
+    cout << arr7;
     auto end = chrono::high_resolution_clock::now(); //стоп
     chrono::duration<double> diff = end - start;
     cout << "Время выполнения: " << diff.count() << " с" << std::endl;

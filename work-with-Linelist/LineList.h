@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include "LineListItem.h"
 using namespace std;
@@ -6,13 +6,13 @@ class LineListException {};
 
 template <class T> class LineList 
 {
-	LineListElem<T>* start; // Начало списка
+	LineListElem<T>* start; // РќР°С‡Р°Р»Рѕ СЃРїРёСЃРєР°
 	LineList(const LineList& list); 
 	//LineList& operator =(const LineList& list);
 public:
 	LineList();
 	~LineList();
-	//LineListElem<T>* getStart();
+	/*LineListElem<T>* getStart();*/
 	void deleteFirst();
 	void deleteAfter(LineListElem<T>* ptr);
 	void insertFirst(const T& data);
@@ -20,7 +20,7 @@ public:
 	template <class T> friend ostream& operator <<(ostream& out, LineList& list);
 };
 
-//Определения функций:
+//РћРїСЂРµРґРµР»РµРЅРёСЏ С„СѓРЅРєС†РёР№:
 template <class T> LineList<T>::LineList()
 {
 	start = 0;

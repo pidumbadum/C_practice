@@ -170,3 +170,4 @@ void Rational::simplify() {
 	}
 }
 
+

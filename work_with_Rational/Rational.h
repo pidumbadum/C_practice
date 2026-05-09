@@ -43,6 +43,7 @@ public:
 	bool operator < (const Rational& r) const;
 	bool operator <= (const Rational& r) const;
 
+	//перевод из типа в тип и обратно 
 	operator int() const;
 	operator double() const;
 };

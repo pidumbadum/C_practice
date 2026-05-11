@@ -18,11 +18,13 @@ int main()
     Node* c = new Node("C");
     Node* d = new Node("D");
 
+    //добавление узлов
     graph.addNode(a);
     graph.addNode(b);
     graph.addNode(c);
     graph.addNode(d);
 
+    //добавление связей
     graph.addEdge(a, b);  // A - B
     graph.addEdge(b, c);  // B - C
     graph.addEdge(a, d);  // A - D
@@ -45,6 +47,7 @@ int main()
         cout << "\n--------------------";
     }
 
+    //проверка того, что удаление узлов работате как надо
     cout << "\n\nУдаление B";
     graph.removeNode(b);
     cout << "\nСвязи в графе после удаления:";
@@ -62,6 +65,7 @@ int main()
         cout << "\n--------------------";
     }
 
+    //проверка того, что удаление связей между узлами работате как надо
     cout << "\n\nУдаление связи A-D";
     graph.removeEdge(a, d);
     cout << "\nСвязи в графе после удаления:";

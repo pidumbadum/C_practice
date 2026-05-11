@@ -45,6 +45,41 @@ int main()
         cout << "\n--------------------";
     }
 
+    cout << "\n\nУдаление B";
+    graph.removeNode(b);
+    cout << "\nСвязи в графе после удаления:";
+    for (Graph::node_iterator node = graph.begin(); node != graph.end(); ++node) {
+        cout << "\nЭлемент: " << (*node)->getName() << endl;
+        if (graph.nb_names(*node).empty()) {
+            cout << " Нет связей";
+        }
+        else {
+            cout << "Связи:";
+            for (const auto& element : graph.nb_names(*node)) {
+                cout << element << " ";
+            }
+        }
+        cout << "\n--------------------";
+    }
+
+    cout << "\n\nУдаление связи A-D";
+    graph.removeEdge(a, d);
+    cout << "\nСвязи в графе после удаления:";
+    for (Graph::node_iterator node = graph.begin(); node != graph.end(); ++node) {
+        cout << "\nЭлемент: " << (*node)->getName() << endl;
+        if (graph.nb_names(*node).empty()) {
+            cout << " Нет связей";
+        }
+        else {
+            cout << "Связи:";
+            for (const auto& element : graph.nb_names(*node)) {
+                cout << element << " ";
+            }
+        }
+        cout << "\n--------------------";
+    }
+
+
     return 0;
 }
 

@@ -1,11 +1,14 @@
 ﻿#pragma once
 #include <iostream>
+class FunctionExeption {};
 class Function
 {
 	int x;
 public:
-	virtual double y() const { return x; };
-	virtual double min(int a, int b) const { return 0; };
-	virtual double max(int a, int b) const { return 0; };
-};
+	Function() { x = 0; };
+	Function(int x1) { x = x1; }
 
+	virtual double y() { return x; }
+	virtual double min(int a, int b) { return 0; }
+	virtual double max(int a, int b) { return 0; }
+};

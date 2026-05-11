@@ -9,7 +9,16 @@ using namespace std;
 
 int main()
 {
-    cout << "pupu";
+    Function *func;
+    Hiperbola hip(2, 4);
+    int a = -5;
+    int b = 5;
+
+    func = &hip;
+    cout << "y(k/x)= "<< func->y();
+    cout << "\nmin(k/x) ["<<a<<':'<<b<<"] = " << func->min(a, b);
+    cout << "\nmax(k/x) [" << a << ':' << b << "] = "<< func->max(a, b);
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

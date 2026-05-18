@@ -7,6 +7,7 @@
 *.filters
 *.user
 *.sln
+*.slnx
 *.exe.recipe
 *.idb
 Debug/

@@ -13,3 +13,9 @@ set<string> Node::get_nb_name() const {
 	}
 	return names;
 }
+const int& Node::getWeight(Node* node) const {
+	if (neighbours.find(node) != neighbours.end()) {
+		return neighbours.find(node)->second;
+	}
+	else { return 0; }
+}

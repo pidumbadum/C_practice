@@ -17,7 +17,7 @@ public:
 	//Graph(); - не нужен, тк конструктор по умолчанию при отсуствии других конструкторов создается атвоматически
 	void addNode(Node* node);
 	void removeNode(Node* node);
-	void addEdge(Node* begin, Node* end);
+	void addEdge(Node* begin, Node* end, int weight);
 	void removeEdge(Node* begin, Node* end);
 
 	set<string> nb_names(Node* node);

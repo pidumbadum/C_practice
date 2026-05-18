@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "ru");
+    //setlocale(LC_ALL, "ru");
     cout << "Привет. Это тест графа\n";
     Graph graph;
     Node* a = new Node("A");
@@ -25,10 +25,10 @@ int main()
     graph.addNode(d);
 
     //добавление связей
-    graph.addEdge(a, b);  // A - B
-    graph.addEdge(b, c);  // B - C
-    graph.addEdge(a, d);  // A - D
-    graph.addEdge(d, b);  // D - B
+    graph.addEdge(a, b, 2);  // A - B
+    graph.addEdge(b, c, 3);  // B - C
+    graph.addEdge(a, d, 5);  // A - D
+    graph.addEdge(d, b, 7);  // D - B
 
     cout << "Все узлы в графе:\n";
     for (Graph::node_iterator node = graph.begin(); node != graph.end(); ++node) {

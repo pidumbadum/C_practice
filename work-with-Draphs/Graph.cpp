@@ -16,13 +16,13 @@ void Graph::removeNode(Node* node) {
 		(*it)->removeNeighbour(node); //цикл проходится по всем узлам и удалает из соседей указатель на удаленный объект
 	}
 }
-void Graph::addEdge(Node* begin, Node* end) {
+void Graph::addEdge(Node* begin, Node* end, int weight) {
 	if (nodes.find(begin) == nodes.end())
 		return;
 	if (nodes.find(end) == nodes.end())
 		return;
-	begin->addNeighbour(end);
-	end->addNeighbour(begin);
+	begin->addNeighbour(end, weight);
+	end->addNeighbour(begin, weight);
 }
 void Graph::removeEdge(Node* begin, Node* end) {
 	//chek the nodes exist

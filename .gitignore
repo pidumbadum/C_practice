@@ -7,6 +7,8 @@
 *.filters
 *.user
 *.sln
+*.exe.recipe
+*.idb
 Debug/
 work wit.fd9a0a9b/
 x64/

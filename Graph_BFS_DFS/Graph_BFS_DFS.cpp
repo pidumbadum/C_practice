@@ -5,6 +5,7 @@
 #include <string>
 #include <set>
 #include "BFS.h"
+#include "DFS.h"
 #include "Graph.h"
 using namespace std;
 
@@ -54,10 +55,19 @@ int main()
     }
     //проверим bfs
     BFS bfs_test(graph);
+    cout << "\nBFS:";
     cout << "\nЕсть ли путь A - C?";
     bfs_test.connected(a, c) ? cout << " Да!" : cout << " Нет!";
     cout << "\nЕсть ли путь A - E?";
     bfs_test.connected(a, e) ? cout << " Да!" : cout << " Нет!";
+
+    //проверим dfs
+    DFS dfs_test(graph);
+    cout << "\n\nDFS:";
+    cout << "\nЕсть ли путь A - C?";
+    dfs_test.connected(a, c) ? cout << " Да!" : cout << " Нет!";
+    cout << "\nЕсть ли путь A - E?";
+    dfs_test.connected(a, e) ? cout << " Да!" : cout << " Нет!";
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

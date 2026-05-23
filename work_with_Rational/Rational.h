@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-using namespace std; //было бы славно упомянуть про необзодимость этих строк в презе
+using namespace std;
 
 class Rational
 {

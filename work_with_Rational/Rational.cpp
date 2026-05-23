@@ -4,8 +4,8 @@ using namespace std;
 class RationalExeption {};
 
 int NOD(int a, int b) {
-	if (a < 0) { a *= 1; }
-	if (b < 0) { b *= 1; }
+	if (a < 0) { a = -a; }
+	if (b < 0) { b = -b; }
 	while (b != 0) {
 		int ostatok = a % b;
 		a = b;
@@ -13,7 +13,15 @@ int NOD(int a, int b) {
 	}
 	return a;
 }
+int NOK(int a, int b) {
+	if (a == 0 || b == 0) return 0;
+	if (a < 0) { a = -a; }
+	if (b < 0) { b = -b; }
 
+	int gcd = NOD(a, b);
+
+	return (a / gcd) * b;
+}
 
 //объявление
 Rational::Rational()
@@ -35,8 +43,9 @@ Rational::Rational(int num, int den)
 
 //арифметические действия
 Rational& Rational::operator += (const Rational& r) {
-	numer = (numer * r.denom + denom * r.numer);
-	denom *= r.denom;
+	int nok_denoms = NOK(denom, r.denom);
+	numer = (numer * (nok_denoms/denom) + r.numer * (nok_denoms/r.denom));
+	denom = nok_denoms;
 	simplify();
 	return *this;
 }
@@ -92,21 +101,30 @@ Rational Rational::operator / (const Rational& r) const
 	Rational res(numer, denom);
 	return res /= r;
 }
-Rational Rational::sqrt() const
-{
-	int numer1 = numer;
-	int denom1 = denom;
+Rational Rational::sqrt() const {
+	if (numer < 0) {
+		cout << "Ошибка: корень из отрицательной дроби не определён\n";
+		throw(RationalExeption());
+	}
 
-	for (int j = 0; j < 3; j++)
-	{
-		denom1 = (denom1 + denom / denom1) / 2;
+	int r = numer;                
+	while (true) {
+		int q = numer / r;
+		if (r <= q) break;
+		r = (r + q) / 2;
 	}
-	for (int j = 0; j < 3; j++)
-	{
-		numer1 = (numer1 + numer / numer1) / 2;
+	int root_num = r;
+
+	int d = denom;            
+	while (true) {
+		int q = denom / d;
+		if (d <= q) break;
+		d = (d + q) / 2;
 	}
-	Rational Xn(numer1, denom1);
-	return Xn;
+	int root_den = d;
+
+	return Rational(root_num, root_den); 
+
 }
 
 //сравнение 
@@ -169,5 +187,3 @@ void Rational::simplify() {
 		denom *= -1;
 	}
 }
-
-

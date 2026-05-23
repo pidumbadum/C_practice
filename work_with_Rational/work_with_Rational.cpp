@@ -30,36 +30,42 @@ int main()
     //else
     //    cout << "Правильно!" << endl;
 
+    Rational eb(4, 25);
+    Rational alo(11, 32);
+    cout << eb.sqrt()<<endl;
+    cout << alo.sqrt() << endl;
+
     // Тестируем sqrt, решаем квадратное уравнение
-    Rational a, b, c;
-    cout << "Ax ^ 2 + Bx + C = 0" << endl;
-    cout << "Enter A: ";
-    cin >> a;
-    cout << "Enter B: ";
-    cin >> b;
-    cout << "Enter C: ";
-    cin >> c;
+    //Ожидаемый ответ х1 = 11/117, х2 = 19/119
+    Rational a(1);
+    Rational b(-3532, 13923);
+    Rational c(209, 13923);
+    cout << "x^2 + (" << b << "x) + " << c << " = 0\n";
     Rational D;
-    cout << b * b << endl;
     D = b * b - Rational(4) * a * c;
+    cout << "Discriminant is " << D;
+    cout << endl << b * b;
+    cout << endl << Rational(4) * a * c;
+    bool chek = ((b * b) <= Rational(4) * a * c);
+    cout <<endl<< chek;
   
     Rational x1, x2, SQ_D;
 
     if (D < Rational(0))
     {
-        cout << "Discriminant is lower then zero!";
+        cout << "\nDiscriminant is lower then zero!";
     }
     else
     {
         SQ_D = D.sqrt();
-        cout << "Discriminant is ";
-        cout << D << endl;
+        cout << "\nDiscriminant sqrt is ";
+        cout << SQ_D << endl;
         x1 = (-b - SQ_D) / (a * Rational(2));
         x2 = (-b + SQ_D) / (a * Rational(2));
         if (x1 != x2)
         {
             cout << "X1 = " << x1 << endl;
-            cout << "X2 = " << x1 << endl;
+            cout << "X2 = " << x2 << endl;
         }
         else { cout << "X1, X2 = " << x1; }
     }

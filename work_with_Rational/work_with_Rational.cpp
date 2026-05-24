@@ -30,17 +30,22 @@ int main()
     //else
     //    cout << "Правильно!" << endl;
 
+    cout << "Double to Rational checking:" << endl;
+    double chek_d = 2.0305;
+    Rational chek_d2(chek_d);
+    cout << "Rational: " << chek_d2 << ", double: " << double(chek_d2) << endl;
+    cout << "\nSQRT func checking:" << endl;
     Rational eb(4, 25);
     Rational alo(11, 32);
-    cout << eb.sqrt()<<endl;
-    cout << alo.sqrt() << endl;
+    cout << "Number: " << eb << " sqrt:" << eb.sqrt() << endl;
+    cout << "Number: " << alo << " sqrt:" << alo.sqrt() << endl;
 
     // Тестируем sqrt, решаем квадратное уравнение
     //Ожидаемый ответ х1 = 11/117, х2 = 19/119
     Rational a(1);
     Rational b(-3532, 13923);
     Rational c(209, 13923);
-    cout << "x^2 + (" << b << "x) + " << c << " = 0\n";
+    cout << "\nx^2 + (" << b << "x) + " << c << " = 0\n";
     Rational D;
     D = b * b - Rational(4) * a * c;
     cout << "Discriminant is " << D;
@@ -110,5 +115,7 @@ int main()
     }
 
     cout << "\nТЕСТ ЗАВЕРШЁН" << endl;
+
+    //Балуюсь с double
 
 }

@@ -40,6 +40,52 @@ Rational::Rational(int num, int den)
 	denom = den;
 	simplify();
 }
+// Конструктор из double 
+Rational::Rational(double val) {
+	// union позволяет записать биты одного типа данных, а прочитать как другой, прикол 
+	union { double d; unsigned long long b; } u; 
+	// дабл записан, теперь на него можно посомтреть и как на длинный инт
+	u.d = val;
+
+	//дальше достаю знак, экспоненту, мантиссу, побитовыми сдвигами и умножением на маску(останется только нужное)
+	unsigned long long sign = (u.b >> 63) & 1;
+	unsigned long long exp = (u.b >> 52) & 0x7FF;
+	unsigned long long mant = u.b & 0xFFFFFFFFFFFFFull;
+
+	//Ноль?
+	if (exp == 0 && mant == 0) {
+		numer = 0; denom = 1; return;
+	}
+
+	//Получаем мантиссу целиком со спрятанной еденицей и степень двойки 
+	// значение = (-1)^знак × 2^(exp - 1023) × 1.мантисса
+	unsigned long long M = (1ULL << 52) | mant;
+	int E = (int)exp - 1023 - 52;
+
+	unsigned long long num, den;
+
+	if (E >= 0) {
+		// Число >= 1: сдвигаем мантиссу влево
+		num = M << E;
+		den = 1;
+	}
+	else {
+		// Число < 1: степень уходит в знаменатель
+		int shift = -E;
+		num = M;
+		den = 1ULL << shift;
+	}
+	//проверяем чектное или несетное, если четное сносим двойку одну
+	while (((num & 1) == 0 && (den & 1) == 0) || num > INT_MAX || den > INT_MAX) {
+		num >>= 1;
+		den >>= 1;
+	}
+
+	numer = sign ? -(long long)num : (long long)num;
+	denom = (long long)den;
+
+	simplify();
+}
 
 //арифметические действия
 Rational& Rational::operator += (const Rational& r) {
@@ -159,6 +205,7 @@ bool Rational::operator <= (const Rational& r) const
 // перевод в другие типы
 Rational::operator int() const{ return numer / denom; }
 Rational::operator double() const { return (double(numer) / denom); }
+
 
 istream& operator >>(istream& in, Rational& r) // как работает это
 {

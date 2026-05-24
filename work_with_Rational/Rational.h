@@ -16,6 +16,7 @@ public:
 	Rational();
 	Rational(int n);
 	Rational(int n, int d);
+	Rational(double val);
 
 	//арифметические действия
 	Rational& operator += (const Rational& r);

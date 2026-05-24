@@ -3,7 +3,7 @@ using namespace std;
 #include "Rational.h"
 class RationalExeption {};
 
-int NOD(int a, int b) {
+static int NOD(int a, int b) {
 	if (a < 0) { a = -a; }
 	if (b < 0) { b = -b; }
 	while (b != 0) {
@@ -13,7 +13,7 @@ int NOD(int a, int b) {
 	}
 	return a;
 }
-int NOK(int a, int b) {
+static int NOK(int a, int b) {
 	if (a == 0 || b == 0) return 0;
 	if (a < 0) { a = -a; }
 	if (b < 0) { b = -b; }
@@ -21,6 +21,44 @@ int NOK(int a, int b) {
 	int gcd = NOD(a, b);
 
 	return (a / gcd) * b;
+}
+static void check_multiply(int a, int b) {
+	if (a == 0 || b == 0) return;
+
+	bool overflow = false;
+
+	if (a > 0 && b > 0) {
+		if (a > INT_MAX / b) overflow = true;
+	}
+	else if (a < 0 && b < 0) {
+		if (a < INT_MAX / b) overflow = true;  
+	}
+	else {
+		if (a > 0) { 
+			if (b < INT_MIN / a) overflow = true;
+		}
+		else {
+			if (a < INT_MIN / b) overflow = true;
+		}
+	}
+
+	if (overflow) {
+		throw RationalExeption();
+	}
+}
+static void check_plus(int a, int b) {
+	if (a < 0 && b < 0) {
+		if (a < INT_MIN - b) {
+			//cout << "\nПереполнение int\n";
+			throw RationalExeption();
+		}
+	}
+	else if (a > 0 && b > 0) {
+		if (a > INT_MAX - b) {
+			//cout << "\nПереполнение int\n";
+			throw RationalExeption();
+		}
+	}
 }
 
 //объявление
@@ -61,7 +99,6 @@ Rational::Rational(double val) {
 	// значение = (-1)^знак × 2^(exp - 1023) × 1.мантисса
 	unsigned long long M = (1ULL << 52) | mant;
 	int E = (int)exp - 1023 - 52;
-
 	unsigned long long num, den;
 
 	if (E >= 0) {
@@ -90,6 +127,11 @@ Rational::Rational(double val) {
 //арифметические действия
 Rational& Rational::operator += (const Rational& r) {
 	int nok_denoms = NOK(denom, r.denom);
+	check_multiply(numer, (nok_denoms / denom));
+	check_multiply(r.numer, (nok_denoms / r.denom));
+	int a = numer * (nok_denoms / denom);
+	int b = r.numer * (nok_denoms / r.denom);
+	check_plus(a, b);
 	numer = (numer * (nok_denoms/denom) + r.numer * (nok_denoms/r.denom));
 	denom = nok_denoms;
 	simplify();
@@ -127,6 +169,8 @@ Rational Rational::operator++ (int)
 }
 Rational& Rational::operator *= (const Rational& r)
 {
+	check_multiply(numer, r.numer);
+	check_multiply(denom, r.denom);
 	numer = numer * r.numer;
 	denom = denom * r.denom;
 	simplify();

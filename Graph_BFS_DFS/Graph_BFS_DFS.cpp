@@ -2,72 +2,30 @@
 //
 #include <iostream>
 #include <locale>
-#include <string>
+//#include <string>
+#include <fstream>
 #include <set>
 #include "BFS.h"
-#include "DFS.h"
+//#include "DFS.h"
 #include "Graph.h"
 using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "ru");
-    cout << "Привет. Это тест графа\n";
-    Graph graph;
-    Node* a = new Node("A");
-    Node* b = new Node("B");
-    Node* c = new Node("C");
-    Node* d = new Node("D");
-    Node* e = new Node("E");
-
-    //добавление узлов
-    graph.addNode(a);
-    graph.addNode(b);
-    graph.addNode(c);
-    graph.addNode(d);
-    graph.addNode(e);
-
-    //добавление связей
-    graph.addEdge(a, b);  // A - B
-    graph.addEdge(b, c);  // B - C
-    graph.addEdge(a, d);  // A - D
-    graph.addEdge(d, b);  // D - B
-
-    cout << "Все узлы в графе:\n";
-    for (Graph::node_iterator node = graph.begin(); node != graph.end(); ++node) {
-        cout << (*node)->getName() << endl;
+    //setlocale(LC_ALL, "ru");
+    ifstream file("./testGraph.txt");
+    if (!file) {
+        std::cerr << "Ошибка открытия файла\n";
+        return 1;
     }
-    cout << endl;
 
-    cout << "Связи в графе:";
-    for (Graph::node_iterator node = graph.begin(); node != graph.end(); ++node) {
-        cout << "\nЭлемент: " << (*node)->getName() << endl;
-        if (graph.nb_names(*node).empty()) {
-            cout << " Нет связей";
-        }
-        else {
-            cout << "Связи:";
-            for (const auto& element : graph.nb_names(*node)) {
-                cout << element << " ";
-            }
-        }
-        cout << "\n--------------------";
+    const int BUFFER_SIZE = 64;
+    char buffer[BUFFER_SIZE];
+
+    while (file.getline(buffer, BUFFER_SIZE)) {
+        std::cout << buffer << '\n';
     }
-    //проверим bfs
-    BFS bfs_test(graph);
-    cout << "\nBFS:";
-    cout << "\nЕсть ли путь A - C?";
-    bfs_test.connected(a, c) ? cout << " Да!" : cout << " Нет!";
-    cout << "\nЕсть ли путь A - E?";
-    bfs_test.connected(a, e) ? cout << " Да!" : cout << " Нет!";
 
-    //проверим dfs
-    DFS dfs_test(graph);
-    cout << "\n\nDFS:";
-    cout << "\nЕсть ли путь A - C?";
-    dfs_test.connected(a, c) ? cout << " Да!" : cout << " Нет!";
-    cout << "\nЕсть ли путь A - E?";
-    dfs_test.connected(a, e) ? cout << " Да!" : cout << " Нет!";
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

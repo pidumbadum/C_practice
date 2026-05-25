@@ -32,6 +32,12 @@ public:
 	Rational sqrt() const;
 	Rational& operator /= (const Rational& r);
 	Rational operator / (const Rational& r) const;
+	//Арифметические операции с интами
+	Rational& operator *= (const int r);
+	Rational operator * (const int r) const;
+	Rational& operator += (const int r);
+	Rational operator + (const int r) const;
+
 
 	Rational& operator ++();
 	Rational operator ++(int);
@@ -42,6 +48,7 @@ public:
 	bool operator > (const Rational& r) const;
 	bool operator >= (const Rational& r) const;
 	bool operator < (const Rational& r) const;
+	bool operator < (const int& r) const;
 	bool operator <= (const Rational& r) const;
 
 	//перевод из типа в тип и обратно 

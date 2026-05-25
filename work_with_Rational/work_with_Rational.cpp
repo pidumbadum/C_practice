@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "ru");
+    //setlocale(LC_ALL, "ru");
     //// Тестируем конструктор, +, -, *=, /, <<
     //Rational a(1, 2), b(-1, 6);
     //cout << "a=" << a << " b=" << b << " a+b=" << a + b << endl;
@@ -47,16 +47,16 @@ int main()
     Rational c(209, 13923);
     cout << "\nx^2 + (" << b << "x) + " << c << " = 0\n";
     Rational D;
-    D = b * b - Rational(4) * a * c;
+    D = b * b - a * c * 4;
     cout << "Discriminant is " << D;
     cout << endl << b * b;
-    cout << endl << Rational(4) * a * c;
-    bool chek = ((b * b) <= Rational(4) * a * c);
+    cout << endl << a * c * 4;
+    bool chek = ((b * b) <= a * c * 4);
     cout <<endl<< chek;
   
     Rational x1, x2, SQ_D;
 
-    if (D < Rational(0))
+    if (D < 0)
     {
         cout << "\nDiscriminant is lower then zero!";
     }
@@ -65,8 +65,8 @@ int main()
         SQ_D = D.sqrt();
         cout << "\nDiscriminant sqrt is ";
         cout << SQ_D << endl;
-        x1 = (-b - SQ_D) / (a * Rational(2));
-        x2 = (-b + SQ_D) / (a * Rational(2));
+        x1 = (-b - SQ_D) / (a * 2);
+        x2 = (-b + SQ_D) / (a * 2);
         if (x1 != x2)
         {
             cout << "X1 = " << x1 << endl;

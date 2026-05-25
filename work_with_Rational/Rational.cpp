@@ -217,6 +217,26 @@ Rational Rational::sqrt() const {
 
 }
 
+//Арифметические операции с интами
+Rational& Rational::operator *= (const int r) {
+	Rational a(r);
+	*this *= a;
+	return (*this);
+}
+Rational Rational::operator * (const int r) const {
+	Rational res(numer, denom);
+	return res *= r;
+}
+Rational& Rational::operator += (const int r) {
+	Rational a(r);
+	*this += a;
+	return *this;
+}
+Rational Rational::operator + (const int r) const {
+	Rational res(numer, denom);
+	return res += r;
+}
+
 //сравнение 
 bool Rational::operator ==(const Rational& r) const
 {
@@ -240,6 +260,11 @@ bool Rational::operator >= (const Rational& r) const
 bool Rational::operator < (const Rational& r) const
 {
 	return !(*this > r);
+}
+bool Rational::operator < (const int& r) const
+{
+	Rational a(r);
+	return !(*this > a);
 }
 bool Rational::operator <= (const Rational& r) const
 {

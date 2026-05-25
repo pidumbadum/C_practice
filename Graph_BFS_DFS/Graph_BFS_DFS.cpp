@@ -13,9 +13,11 @@ using namespace std;
 int main()
 {
     //setlocale(LC_ALL, "ru");
+    bool delete_first_line(true);
+
     ifstream file("./testGraph.txt");
     if (!file) {
-        std::cerr << "Ошибка открытия файла\n";
+        cout << "Ошибка открытия файла\n";
         return 1;
     }
 
@@ -23,7 +25,8 @@ int main()
     char buffer[BUFFER_SIZE];
 
     while (file.getline(buffer, BUFFER_SIZE)) {
-        std::cout << buffer << '\n';
+        if (delete_first_line) delete_first_line = false;
+        else{ cout << buffer << '\n'; }
     }
 
 }
